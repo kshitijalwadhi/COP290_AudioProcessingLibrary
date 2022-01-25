@@ -80,19 +80,39 @@ Mat randMat(int a, int b){
     return M;
 }
 
+bool isEqual(Mat M1, Mat M2){
+    if(M1.size() != M2.size()){
+        return false;
+    }
+    for(int i=0;i<M1.size();i++){
+        for(int j=0;j<M1[0].size();j++){
+            if(M1[i][j] != M2[i][j]){
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
 int main(){
 
     Mat M1 = randMat(2000,80);
     Mat M2 = randMat(80,1000);
 
     auto start_time = high_resolution_clock::now();
-    Mat M3 = matmul(M1,M2);
+    Mat M4 = matmul(M1,M2);
     auto end_time_1 = high_resolution_clock::now();
     spawnThreads(M1,M2,NUM_CORES);
     auto end_time_2 = high_resolution_clock::now();
 
-    cout<<"Time taken without threading: "<<duration_cast<microseconds>(end_time_1 - start_time).count()/1000<<" milliseconds"<<endl;
-    cout<<"Time taken with threading: "<<duration_cast<microseconds>(end_time_2 - end_time_1).count()/1000<<" milliseconds"<<endl;
+    bool equal = isEqual(M4,M3);
+    if(!equal){
+        cout<<"Matrices are not equal"<<endl;
+    }
+    else{
+        cout<<"Time taken without threading: "<<duration_cast<microseconds>(end_time_1 - start_time).count()/1000<<" milliseconds"<<endl;
+        cout<<"Time taken with threading: "<<duration_cast<microseconds>(end_time_2 - end_time_1).count()/1000<<" milliseconds"<<endl;    
+    }
 
     return 0;
 }
