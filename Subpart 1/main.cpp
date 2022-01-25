@@ -77,7 +77,6 @@ int main(int argc, char** argv){
         int stride = stoi(argv[4]);
         string output_file = argv[5];
         Mat M = readMatrix(input_file);
-        printMat(M);
         Mat output;
         if (type == "max")
             output = maxPooling(M,stride);
