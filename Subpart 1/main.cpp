@@ -17,7 +17,7 @@ int main(int argc, char** argv){
 
     if(argc==1){
         cout<<"Invalid arguments"<<endl;
-        cout<<"Usage: ./code <function_name> ...."<<endl;
+        cout<<"Usage: ./main <function_name> ...."<<endl;
         return 0;
     }
 
@@ -43,7 +43,8 @@ int main(int argc, char** argv){
         }
 
         Mat output = FC_Layer(M,W,B);
-        printMat(output);
+        //printMat(output);
+        writeMatrix(output,output_file);
     }
 
     else if (fun=="activation"){
@@ -61,7 +62,8 @@ int main(int argc, char** argv){
             output = relu(M);
         else
             output = tanh(M);
-        printMat(output);
+        //printMat(output);
+        writeMatrix(output,output_file);
     }
 
     else if (fun=="pooling"){
@@ -75,12 +77,14 @@ int main(int argc, char** argv){
         int stride = stoi(argv[4]);
         string output_file = argv[5];
         Mat M = readMatrix(input_file);
+        printMat(M);
         Mat output;
         if (type == "max")
             output = maxPooling(M,stride);
         else
             output = avgPooling(M,stride);
-        printMat(output);
+        //printMat(output);
+        writeMatrix(output,output_file);
     }
 
     else if (fun=="probability"){
@@ -98,7 +102,8 @@ int main(int argc, char** argv){
             output = softmax(V);
         else
             output = sigmoid(V);
-        printVec(output);
+        //printVec(output);
+        writeVector(output,output_file);
     }
 
     return 0;

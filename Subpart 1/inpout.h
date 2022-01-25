@@ -12,27 +12,39 @@ using namespace std;
 #define Vec vector<float>
 
 Mat readMatrix(string filename){
-    Mat temp;
+    Vec temp;
     ifstream file(filename);
     string line;
+    // read dimensions
+    getline(file,line);
+    stringstream ss(line);
+    int m;
+    ss >> m;
+    getline(file,line);
+    ss.clear();
+    ss.str(line);
+    int n;
+    ss >> n;
+
+    // read matrix
     while(getline(file,line)){
         stringstream ss(line);
         string token;
-        vector<float> row;
         while(getline(ss,token,' ')){
-            row.push_back(stof(token));
+            temp.push_back(stof(token));
         }
-        temp.push_back(row);
-    }
-    Mat M;
-    for(int i=0;i<temp[0].size();i++){
-        vector<float> row;
-        for(int j=0;j<temp.size();j++){
-            row.push_back(temp[j][i]);
-        }
-        M.push_back(row);
     }
 
+    Mat M;
+    M.resize(n);
+    for(int i=0;i<n;i++){
+        M[i].resize(m);
+    }
+    for(int i=0;i<m;i++){
+        for(int j=0;j<n;j++){
+            M[j][i] = temp[i*n+j];
+        }
+        }
     return M;
 }
 
@@ -40,6 +52,12 @@ Vec readVector(string filename){
     Vec V;
     ifstream file(filename);
     string line;
+    // read dimensions
+    getline(file,line);
+    stringstream ss(line);
+    int n;
+    ss >> n;
+    // read vector
     while(getline(file,line)){
         stringstream ss(line);
         string token;
@@ -63,6 +81,24 @@ void printMat(Mat M){
             cout<<M[i][j]<<" ";
         }
         cout<<endl;
+    }
+}
+
+void writeMatrix(Mat M, string filename){
+    ofstream file(filename);
+    file<<M[0].size()<<endl<<M.size()<<endl;
+    for(int i=0;i<M[0].size();i++){
+        for(int j=0;j<M.size();j++){
+            file<<M[j][i]<<endl;
+        }
+    }
+}
+
+void writeVector(Vec V, string filename){
+    ofstream file(filename);
+    file<<V.size()<<endl;
+    for(int i=0;i<V.size();i++){
+        file<<V[i]<<endl;
     }
 }
 
