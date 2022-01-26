@@ -25,7 +25,9 @@ Mat relu(Mat input){
 Mat tanh(Mat input){
     for(int i=0;i<input.size();i++){
         for(int j=0;j<input[0].size();j++){
-            input[i][j]=tanh(input[i][j]);
+            //input[i][j]=tanh(input[i][j]);
+            float x = input[i][j];
+            input[i][j] = (exp(2*x)-1)/(exp(2*x)+1);
         }
     }
     return input;
