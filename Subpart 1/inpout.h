@@ -11,6 +11,17 @@ using namespace std;
 #define Mat vector<vector<float> >
 #define Vec vector<float>
 
+bool is_file_exist(string filename){
+    ifstream ifile(filename.c_str());
+    if(ifile){
+        ifile.close();
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
 Mat readMatrix(string filename){
     Vec temp;
     ifstream file(filename);
