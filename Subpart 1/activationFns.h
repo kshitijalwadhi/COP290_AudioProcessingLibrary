@@ -71,13 +71,21 @@ Output:
 Vec softmax(Vec input){
     int n = input.size();
     float sum = 0;
+    float maxi = input[0];
     for(int i=0;i<n;i++){
-        sum += exp(input[i]);
+        if(input[i]>maxi){
+            maxi = input[i];
+        }
     }
     for(int i=0;i<n;i++){
-        input[i] = exp(input[i])/sum;
+        sum += exp(input[i]-maxi);
+    }
+    for(int i=0;i<n;i++){
+        input[i] = exp(input[i]-maxi)/sum;
     }
     return input;
 }
+
+
 
 #endif

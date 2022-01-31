@@ -59,13 +59,16 @@ Mat avgPooling(Mat M,int stride){
 
     for(int i=0; i<n;i+=stride){
         for(int j=0; j<n; j+=stride){
-            float sum = 0;
+            float avg = 0;
+            int t = 1;
+
             for(int x=0;x<stride;x++){
                 for(int y=0;y<stride;y++){
-                    sum += M[i+x][j+y];
+                    avg += (M[i+x][j+y]-avg)/t;
+                    t += 1;
                 }
             }
-            output[itr_i][itr_j] = sum/(stride*stride);
+            output[itr_i][itr_j] = avg;
             itr_j+=1;
         }
         itr_j = 0;
