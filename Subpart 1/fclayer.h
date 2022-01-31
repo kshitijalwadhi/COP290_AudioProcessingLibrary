@@ -5,12 +5,20 @@
 #include<fstream>
 #include<sstream>
 #include<vector>
-#include<algorithm>
 #include<cmath>
 using namespace std;
 #define Mat vector<vector<float> >
 #define Vec vector<float>
 
+
+/*
+Function to perform matrix multiplication of two matrices in O(n^3) time
+Input:
+    Mat A: Matrix A
+    Mat B: Matrix B
+Output:
+    Mat: Result of matrix multiplication
+*/
 
 Mat matmul(Mat M1, Mat M2){
     int a = M1.size();
@@ -26,6 +34,16 @@ Mat matmul(Mat M1, Mat M2){
     }
     return M3;
 }
+
+/*
+Function to perform the forward pass of a fully connected layer
+Input:
+    Mat input: Input to the layer
+    Mat weights: Weights of the layer
+    Mat bias: Bias of the layer
+Output:
+    Mat: Output of the layer
+*/
 
 Mat FC_Layer(Mat M, Mat W, Mat B){
     Mat output = matmul(M,W);

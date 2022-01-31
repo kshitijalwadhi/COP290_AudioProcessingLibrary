@@ -5,12 +5,18 @@
 #include<fstream>
 #include<sstream>
 #include<vector>
-#include<algorithm>
 #include<cmath>
 using namespace std;
 #define Mat vector<vector<float> >
 #define Vec vector<float>
 
+/*
+Function to perform relu on a matrix
+Input:
+    M: input matrix
+Output:
+    output: output matrix
+*/
 Mat relu(Mat input){
     for(int i=0;i<input.size();i++){
         for(int j=0;j<input[0].size();j++){
@@ -22,6 +28,13 @@ Mat relu(Mat input){
     return input;
 }
 
+/*
+Function to perform tanh on a matrix
+Input:
+    M: input matrix
+Output:
+    output: output matrix
+*/
 Mat tanh(Mat input){
     for(int i=0;i<input.size();i++){
         for(int j=0;j<input[0].size();j++){
@@ -33,7 +46,13 @@ Mat tanh(Mat input){
     return input;
 }
 
-
+/*
+Function to perform sigmoid on a vector
+Input:
+    V: input vector
+Output:
+    output: output vector
+*/
 Vec sigmoid(Vec input){
     int n = input.size();
     for(int i=0;i<n;i++){
@@ -42,6 +61,13 @@ Vec sigmoid(Vec input){
     return input;
 }
 
+/*
+Function to perform softmax on a vector
+Input:
+    V: input vector
+Output:
+    output: output vector
+*/
 Vec softmax(Vec input){
     int n = input.size();
     float sum = 0;

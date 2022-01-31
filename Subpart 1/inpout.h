@@ -5,12 +5,19 @@
 #include<fstream>
 #include<sstream>
 #include<vector>
-#include<algorithm>
 #include<cmath>
 using namespace std;
 #define Mat vector<vector<float> >
 #define Vec vector<float>
 
+/*
+Function to check if the file exists
+Input:
+    filename: name of the file
+Output:
+    true if the file exists
+    false if the file does not exist
+*/
 bool is_file_exist(string filename){
     ifstream ifile(filename.c_str());
     if(ifile){
@@ -22,6 +29,13 @@ bool is_file_exist(string filename){
     }
 }
 
+/*
+Function to read Matrix from a file
+Input:
+    filename: name of the file
+Output:
+    M: Matrix read from the file
+*/
 Mat readMatrix(string filename){
     Vec temp;
     ifstream file(filename);
@@ -59,6 +73,13 @@ Mat readMatrix(string filename){
     return M;
 }
 
+/*
+Function to read a vector from a file
+Input:
+    filename: name of the file
+Output:
+    V: vector read from the file
+*/
 Vec readVector(string filename){
     Vec V;
     ifstream file(filename);
@@ -79,6 +100,11 @@ Vec readVector(string filename){
     return V;
 }
 
+/*
+Function to print a vector
+Input:
+    V: vector to be printed
+*/
 void printVec(Vec V){
     for(int i=0;i<V.size();i++){
         cout<<V[i]<<" ";
@@ -86,6 +112,11 @@ void printVec(Vec V){
     cout<<endl;
 }
 
+/*
+Function to print a matrix
+Input:
+    M: matrix to be printed
+*/
 void printMat(Mat M){
     for(int i=0;i<M.size();i++){
         for(int j=0;j<M[0].size();j++){
@@ -95,6 +126,12 @@ void printMat(Mat M){
     }
 }
 
+/*
+Function to write a Matrix M to a file
+Input:
+    M: Matrix to be written
+    filename: name of the file
+*/
 void writeMatrix(Mat M, string filename){
     ofstream file(filename);
     file<<M[0].size()<<endl<<M.size()<<endl;
@@ -105,6 +142,12 @@ void writeMatrix(Mat M, string filename){
     }
 }
 
+/*
+Function to write a vector V to a file
+Input:
+    V: vector to be written
+    filename: name of the file
+*/
 void writeVector(Vec V, string filename){
     ofstream file(filename);
     file<<V.size()<<endl;

@@ -5,12 +5,19 @@
 #include<fstream>
 #include<sstream>
 #include<vector>
-#include<algorithm>
 #include<cmath>
 using namespace std;
 #define Mat vector<vector<float> >
 #define Vec vector<float>
 
+/*
+Function to perform max pooling on a matrix
+Input:
+    M: input matrix
+    stride: size of the pooling window
+Output:
+    output: output matrix
+*/
 Mat maxPooling(Mat M,int stride){
     int n = M.size();
     vector<vector<float> > output( n/stride , vector<float> (n/stride));
@@ -35,6 +42,14 @@ Mat maxPooling(Mat M,int stride){
     return output;
 }
 
+/*
+Function to perform average pooling on a matrix
+Input:
+    M: input matrix
+    stride: size of the pooling window
+Output:
+    output: output matrix
+*/
 Mat avgPooling(Mat M,int stride){
     int n = M.size();
     vector<vector<float> > output( n/stride , vector<float> (n/stride));
