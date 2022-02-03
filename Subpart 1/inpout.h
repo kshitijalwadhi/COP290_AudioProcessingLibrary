@@ -1,11 +1,11 @@
 #ifndef INPUTOUTPUT_H
 #define INPUTOUTPUT_H
 
-#include<iostream>
-#include<fstream>
-#include<sstream>
-#include<vector>
-#include<cmath>
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <vector>
+#include <cmath>
 using namespace std;
 #define Mat vector<vector<float> >
 #define Vec vector<float>
@@ -18,13 +18,16 @@ Output:
     true if the file exists
     false if the file does not exist
 */
-bool is_file_exist(string filename){
+bool is_file_exist(string filename)
+{
     ifstream ifile(filename.c_str());
-    if(ifile){
+    if (ifile)
+    {
         ifile.close();
         return true;
     }
-    else{
+    else
+    {
         return false;
     }
 }
@@ -36,40 +39,46 @@ Input:
 Output:
     M: Matrix read from the file
 */
-Mat readMatrix(string filename){
+Mat read_matrix(string filename)
+{
     Vec temp;
     ifstream file(filename);
     string line;
     // read dimensions
-    getline(file,line);
+    getline(file, line);
     stringstream ss(line);
     int m;
     ss >> m;
-    getline(file,line);
+    getline(file, line);
     ss.clear();
     ss.str(line);
     int n;
     ss >> n;
 
     // read matrix
-    while(getline(file,line)){
+    while (getline(file, line))
+    {
         stringstream ss(line);
         string token;
-        while(getline(ss,token,' ')){
+        while (getline(ss, token, ' '))
+        {
             temp.push_back(stof(token));
         }
     }
 
     Mat M;
     M.resize(n);
-    for(int i=0;i<n;i++){
+    for (int i = 0; i < n; i++)
+    {
         M[i].resize(m);
     }
-    for(int i=0;i<m;i++){
-        for(int j=0;j<n;j++){
-            M[j][i] = temp[i*n+j];
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            M[j][i] = temp[i * n + j];
         }
-        }
+    }
     return M;
 }
 
@@ -80,20 +89,23 @@ Input:
 Output:
     V: vector read from the file
 */
-Vec readVector(string filename){
+Vec read_vector(string filename)
+{
     Vec V;
     ifstream file(filename);
     string line;
     // read dimensions
-    getline(file,line);
+    getline(file, line);
     stringstream ss(line);
     int n;
     ss >> n;
     // read vector
-    while(getline(file,line)){
+    while (getline(file, line))
+    {
         stringstream ss(line);
         string token;
-        while(getline(ss,token,' ')){
+        while (getline(ss, token, ' '))
+        {
             V.push_back(stof(token));
         }
     }
@@ -105,11 +117,13 @@ Function to print a vector
 Input:
     V: vector to be printed
 */
-void printVec(Vec V){
-    for(int i=0;i<V.size();i++){
-        cout<<V[i]<<" ";
+void print_vector(Vec V)
+{
+    for (int i = 0; i < V.size(); i++)
+    {
+        cout << V[i] << " ";
     }
-    cout<<endl;
+    cout << endl;
 }
 
 /*
@@ -117,12 +131,15 @@ Function to print a matrix
 Input:
     M: matrix to be printed
 */
-void printMat(Mat M){
-    for(int i=0;i<M.size();i++){
-        for(int j=0;j<M[0].size();j++){
-            cout<<M[i][j]<<" ";
+void print_matrix(Mat M)
+{
+    for (int i = 0; i < M.size(); i++)
+    {
+        for (int j = 0; j < M[0].size(); j++)
+        {
+            cout << M[i][j] << " ";
         }
-        cout<<endl;
+        cout << endl;
     }
 }
 
@@ -132,12 +149,16 @@ Input:
     M: Matrix to be written
     filename: name of the file
 */
-void writeMatrix(Mat M, string filename){
+void write_matrix(Mat M, string filename)
+{
     ofstream file(filename);
-    file<<M[0].size()<<endl<<M.size()<<endl;
-    for(int i=0;i<M[0].size();i++){
-        for(int j=0;j<M.size();j++){
-            file<<M[j][i]<<endl;
+    file << M[0].size() << endl
+         << M.size() << endl;
+    for (int i = 0; i < M[0].size(); i++)
+    {
+        for (int j = 0; j < M.size(); j++)
+        {
+            file << M[j][i] << endl;
         }
     }
 }
@@ -148,11 +169,13 @@ Input:
     V: vector to be written
     filename: name of the file
 */
-void writeVector(Vec V, string filename){
+void write_vector(Vec V, string filename)
+{
     ofstream file(filename);
-    file<<V.size()<<endl;
-    for(int i=0;i<V.size();i++){
-        file<<V[i]<<endl;
+    file << V.size() << endl;
+    for (int i = 0; i < V.size(); i++)
+    {
+        file << V[i] << endl;
     }
 }
 
