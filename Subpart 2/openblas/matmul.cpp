@@ -5,12 +5,11 @@
 #include<cmath>
 #include<thread>
 #include<chrono>
-#include "/home/kshitij/libs/OpenBLAS/cblas.h"
+#include "cblas.h"
 using namespace std;
 using namespace std::chrono;
 #define Mat vector<vector<float> >
 #define Vec vector<float>
-//#define NUM_CORES 4
 
 
 Mat matmul(Mat M1, Mat M2){
