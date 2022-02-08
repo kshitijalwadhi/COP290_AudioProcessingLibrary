@@ -6,7 +6,7 @@
 #include "matrices.h"
 #include "activationFns.h"
 #include "subsampling.h"
-#include "inpout.h"
+#include "utils.h"
 using namespace std;
 
 // #define Mat vector<vector<float> >

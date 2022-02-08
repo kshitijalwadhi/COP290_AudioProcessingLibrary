@@ -10,45 +10,12 @@
 #include "matrices_pthread.h"
 #include "activationFns.h"
 #include "subsampling.h"
-#include "inpout.h"
+#include "utils.h"
 using namespace std;
 using namespace std::chrono;
 
 // #define Mat vector<vector<float> >
 // #define Vec vector<float>
-
-void printMat(Mat M){
-    for(int i=0;i<M.size();i++){
-        for(int j=0;j<M[0].size();j++){
-            cout<<M[i][j]<<" ";
-        }
-        cout<<endl;
-    }
-}
-
-Mat randMat(int a, int b){
-    Mat M(a, Vec(b));
-    for(int i=0;i<a;i++){
-        for(int j=0;j<b;j++){
-            M[i][j] = rand()%10;
-        }
-    }
-    return M;
-}
-
-bool isEqual(Mat M1, Mat M2){
-    if(M1.size() != M2.size()){
-        return false;
-    }
-    for(int i=0;i<M1.size();i++){
-        for(int j=0;j<M1[0].size();j++){
-            if(M1[i][j] != M2[i][j]){
-                return false;
-            }
-        }
-    }
-    return true;
-}
 
 int main(){
 

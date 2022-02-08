@@ -175,3 +175,27 @@ void write_vector(Vec V, string filename)
         file << V[i] << endl;
     }
 }
+
+Mat randMat(int a, int b){
+    Mat M(a, Vec(b));
+    for(int i=0;i<a;i++){
+        for(int j=0;j<b;j++){
+            M[i][j] = rand()%10;
+        }
+    }
+    return M;
+}
+
+bool isEqual(Mat M1, Mat M2){
+    if(M1.size() != M2.size()){
+        return false;
+    }
+    for(int i=0;i<M1.size();i++){
+        for(int j=0;j<M1[0].size();j++){
+            if(M1[i][j] != M2[i][j]){
+                return false;
+            }
+        }
+    }
+    return true;
+}

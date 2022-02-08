@@ -1,5 +1,5 @@
-#ifndef INPUTOUTPUT_H
-#define INPUTOUTPUT_H
+#ifndef UTILS_H
+#define UTILS_H
 
 #include <vector>
 
@@ -13,6 +13,8 @@ void print_vector(Vec V);
 void print_matrix(Mat M);
 void write_matrix(Mat M, std::string filename);
 void write_vector(Vec V, std::string filename);
+Mat randMat(int a, int b);
+bool isEqual(Mat M1, Mat M2);
 
 
 #endif
