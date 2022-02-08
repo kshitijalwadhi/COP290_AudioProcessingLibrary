@@ -1,7 +1,6 @@
 #ifndef FCLAYER_PTHREAD_H
 #define FCLAYER_PTHREAD_H
 #include <vector>
-#define NUM_CORES 4
 
 #define Mat std::vector<std::vector<float> >
 #define Vec std::vector<float>

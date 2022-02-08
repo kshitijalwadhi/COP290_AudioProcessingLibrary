@@ -45,6 +45,7 @@ void spawnThreads(Mat M1, Mat M2, int n)
     int b = M1[0].size();
     int c = M2[0].size();
 
+    M3.clear();
     M3.resize(a, Vec(c));
 
     for (int i = 0; i < n; i++)
