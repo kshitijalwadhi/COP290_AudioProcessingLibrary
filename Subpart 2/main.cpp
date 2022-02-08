@@ -9,8 +9,8 @@
 #include "inpout.h"
 using namespace std;
 
-#define Mat vector<vector<float> >
-#define Vec vector<float>
+// #define Mat vector<vector<float> >
+// #define Vec vector<float>
 
 int main(int argc, char **argv)
 {

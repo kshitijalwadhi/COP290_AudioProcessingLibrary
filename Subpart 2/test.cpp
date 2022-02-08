@@ -5,7 +5,7 @@
 #include <chrono>
 #include <cmath>
 #include "matrices.h"
-// #include "matrices_mkl.h"
+#include "matrices_mkl.h"
 #include "matrices_openblas.h"
 #include "matrices_pthread.h"
 #include "activationFns.h"
@@ -14,8 +14,8 @@
 using namespace std;
 using namespace std::chrono;
 
-#define Mat vector<vector<float> >
-#define Vec vector<float>
+// #define Mat vector<vector<float> >
+// #define Vec vector<float>
 
 void printMat(Mat M){
     for(int i=0;i<M.size();i++){
@@ -62,13 +62,13 @@ int main(){
     auto end_time_2 = high_resolution_clock::now();
     Mat M5 = matmul_blas(M1,M2);
     auto end_time_3 = high_resolution_clock::now();
-    // Mat M6 = matmul_mkl(M1,M2);
-    // auto end_time_4 = high_resolution_clock::now();
+    Mat M6 = matmul_mkl(M1,M2);
+    auto end_time_4 = high_resolution_clock::now();
 
     cout<<"Time taken without threading: "<<duration_cast<microseconds>(end_time_1 - start_time).count()/1000<<" milliseconds"<<endl;
     cout<<"Time taken with threading: "<<duration_cast<microseconds>(end_time_2 - end_time_1).count()/1000<<" milliseconds"<<endl;    
     cout<<"Time taken with blas: "<<duration_cast<microseconds>(end_time_3 - end_time_2).count()/1000<<" milliseconds"<<endl;
-    //cout<<"Time taken with mkl: "<<duration_cast<microseconds>(end_time_4 - end_time_3).count()/1000<<" milliseconds"<<endl;
+    cout<<"Time taken with mkl: "<<duration_cast<microseconds>(end_time_4 - end_time_3).count()/1000<<" milliseconds"<<endl;
 
     return 0;
 }
