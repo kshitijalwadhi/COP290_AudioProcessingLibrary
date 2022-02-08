@@ -6,6 +6,7 @@
 #include <sstream>
 #include <vector>
 #include <cmath>
+#include "matrices.h"
 #include "cblas.h"
 using namespace std;
 #define Mat vector<vector<float> >
@@ -48,29 +49,6 @@ Mat matmul_blas(Mat M1, Mat M2)
         for (int j = 0; j < c; j++)
         {
             M3[i][j] = C_rowmajor[i * c + j];
-        }
-    }
-    return M3;
-}
-
-/*
-Function to perform addition of two matrices.
-Input:
-    Mat A: Matrix A
-    Mat B: Matrix B
-Output:
-    Mat: Result of addition
-*/
-Mat add(Mat M1, Mat M2)
-{
-    int a = M1.size();
-    int b = M1[0].size();
-    Mat M3(a, Vec(b));
-    for (int i = 0; i < a; i++)
-    {
-        for (int j = 0; j < b; j++)
-        {
-            M3[i][j] = M1[i][j] + M2[i][j];
         }
     }
     return M3;
