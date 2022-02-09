@@ -58,20 +58,3 @@ void spawnThreads(Mat M1, Mat M2, int n)
         th.join();
     }
 }
-
-
-/*
-Function to perform the forward pass of a fully connected layer
-Input:
-    Mat input: Input to the layer
-    Mat weights: Weights of the layer
-    Mat bias: Bias of the layer
-Output:
-    Mat: Output of the layer
-*/
-
-Mat FC_Layer_pthread(Mat M, Mat W, Mat B)
-{
-    spawnThreads(M, W, NUM_CORES);
-    return add(M3, B);
-}

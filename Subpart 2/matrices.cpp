@@ -35,42 +35,5 @@ Mat matmul(Mat M1, Mat M2)
     return M3;
 }
 
-/*
-Function to perform addition of two matrices.
-Input:
-    Mat A: Matrix A
-    Mat B: Matrix B
-Output:
-    Mat: Result of addition
-*/
-Mat add(Mat M1, Mat M2)
-{
-    int a = M1.size();
-    int b = M1[0].size();
-    Mat M3(a, Vec(b));
-    for (int i = 0; i < a; i++)
-    {
-        for (int j = 0; j < b; j++)
-        {
-            M3[i][j] = M1[i][j] + M2[i][j];
-        }
-    }
-    return M3;
-}
 
-/*
-Function to perform the forward pass of a fully connected layer
-Input:
-    Mat input: Input to the layer
-    Mat weights: Weights of the layer
-    Mat bias: Bias of the layer
-Output:
-    Mat: Output of the layer
-*/
 
-Mat FC_Layer(Mat M, Mat W, Mat B)
-{
-    Mat output = matmul(M, W);
-    output = add(output, B);
-    return output;
-}

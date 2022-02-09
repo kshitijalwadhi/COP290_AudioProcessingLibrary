@@ -51,19 +51,3 @@ Mat matmul_blas(Mat M1, Mat M2)
     return M3;
 }
 
-/*
-Function to perform the forward pass of a fully connected layer
-Input:
-    Mat input: Input to the layer
-    Mat weights: Weights of the layer
-    Mat bias: Bias of the layer
-Output:
-    Mat: Output of the layer
-*/
-
-Mat FC_Layer_blas(Mat M, Mat W, Mat B)
-{
-    Mat output = matmul_blas(M, W);
-    output = add(output, B);
-    return output;
-}

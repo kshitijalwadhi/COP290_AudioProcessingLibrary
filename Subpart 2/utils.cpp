@@ -3,9 +3,12 @@
 #include <sstream>
 #include <vector>
 #include <cmath>
+#include "matrices.h"
+#include "matrices_mkl.h"
+#include "matrices_openblas.h"
+#include "matrices_pthread.h"
 using namespace std;
-#define Mat vector<vector<float> >
-#define Vec vector<float>
+#define NUM_CORES 4
 
 /*
 Function to check if the file exists
@@ -198,4 +201,64 @@ bool isEqual(Mat M1, Mat M2){
         }
     }
     return true;
+}
+
+/*
+Function to perform addition of two matrices.
+Input:
+    Mat A: Matrix A
+    Mat B: Matrix B
+Output:
+    Mat: Result of addition
+*/
+Mat add(Mat M1, Mat M2)
+{
+    int a = M1.size();
+    int b = M1[0].size();
+    Mat M3(a, Vec(b));
+    for (int i = 0; i < a; i++)
+    {
+        for (int j = 0; j < b; j++)
+        {
+            M3[i][j] = M1[i][j] + M2[i][j];
+        }
+    }
+    return M3;
+}
+
+/*
+Function to perform the forward pass of a fully connected layer
+Input:
+    Mat input: Input to the layer
+    Mat weights: Weights of the layer
+    Mat bias: Bias of the layer
+Output:
+    Mat: Output of the layer
+*/
+Mat FC_Layer(Mat M, Mat W, Mat B, int method=0)
+{
+    if(method==0)
+    {
+        Mat output = matmul(M, W);
+        output = add(output, B);
+        return output;
+    }
+    else if(method == 1)
+    {
+        Mat M3;
+        spawnThreads(M, W, NUM_CORES);
+        return add(M3, B);
+    }
+    else if(method==2)
+    {
+        Mat output = matmul_blas(M, W);
+        output = add(output, B);
+        return output;
+    }
+    else
+    {
+        Mat output = matmul_mkl(M, W);
+        output = add(output, B);
+        return output;
+    }
 }
