@@ -4,6 +4,7 @@
 #include <vector>
 #include <cmath>
 #include <thread>
+#include <pthread.h>
 #include "matrices.h"
 using namespace std;
 #define NUM_CORES 4
@@ -11,18 +12,24 @@ using namespace std;
 #define Vec vector<float>
 
 Mat M3;
+struct arguments {
+    Mat M1;
+    Mat M2;
+    int start_row;
+    int end_row;
+};
 
 /*
 Function to perform matrix multiplication of two matrices with multi-threading
-Input:
-    Mat A: Matrix A
-    Mat B: Matrix B
-Output:
-    Mat: Result of matrix multiplication
 */
-
-void matmul_threading(Mat M1, Mat M2, int start_row, int end_row)
+void* multi(void* args)
 {
+    arguments* argument = (arguments*)args;
+    Mat M1 = argument->M1;
+    Mat M2 = argument->M2;
+    int start_row = argument->start_row;
+    int end_row = argument->end_row;
+
     int a = M1.size();
     int b = M1[0].size();
     int c = M2[0].size();
@@ -40,7 +47,6 @@ void matmul_threading(Mat M1, Mat M2, int start_row, int end_row)
 
 void spawnThreads(Mat M1, Mat M2, int n)
 {
-    std::vector<thread> threads(n);
     int a = M1.size();
     int b = M1[0].size();
     int c = M2[0].size();
@@ -48,13 +54,20 @@ void spawnThreads(Mat M1, Mat M2, int n)
     M3.clear();
     M3.resize(a, Vec(c));
 
-    for (int i = 0; i < n; i++)
+    pthread_t threads[NUM_CORES];
+
+    for (int i=0;i<n;i++)
     {
-        threads[i] = thread(matmul_threading, M1, M2, i * M1.size() / n, (i + 1) * M1.size() / n);
+        arguments* arg = new arguments;
+        arg->M1 = M1;
+        arg->M2 = M2;
+        arg->start_row = i * M1.size() / n;
+        arg->end_row = (i + 1) * M1.size() / n;
+        pthread_create(&threads[i], NULL, multi, (void*)arg);
     }
 
-    for (auto &th : threads)
+    for (int i=0;i<n;i++)
     {
-        th.join();
+        pthread_join(threads[i], NULL);
     }
 }
