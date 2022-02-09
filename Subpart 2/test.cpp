@@ -16,16 +16,16 @@ using namespace std::chrono;
 
 #define NUM_CORES 4
 
-int START_SZ = 8;
-int END_SZ = 1024;
+int START_SZ = 64;
+int END_SZ = 8000;
 int NUM_TESTS = 8;
 
 int main(){
 
-    ofstream f_mean,f_std,f_all;
+    ofstream f_mean,f_all,f_stat;
     f_mean.open("results_mean.dat");
-    f_std.open("results_std.dat");
     f_all.open("results_all.dat");
+    f_stat.open("results_stat.dat");
 
     for (int i = START_SZ;i<END_SZ;i*=2)
     {
@@ -37,7 +37,7 @@ int main(){
         for(int j=0;j<NUM_TESTS;j++)
         {
             Mat M1 = randMat(i,i);
-            Mat M2 = randMat(i,i);
+            Mat M2 = randMat(i,1);
 
             auto start_time = high_resolution_clock::now();
             Mat M4 = matmul(M1,M2);
@@ -71,6 +71,11 @@ int main(){
             avg_mkl += times_mkl[j];
             f_all<<i<<" "<<times_normal[j]<<" "<<times_pthread[j]<<" "<<times_openblas[j]<<" "<<times_mkl[j]<<endl;
         }
+        avg_normal = avg_normal/times_normal.size();
+        avg_pthread = avg_pthread/times_pthread.size();
+        avg_openblas = avg_openblas/times_openblas.size();
+        avg_mkl = avg_mkl/times_mkl.size();
+
         for(int j =0;j<NUM_TESTS;j++)
         {
             std_normal += (times_normal[j]-avg_normal)*(times_normal[j]-avg_normal);
@@ -82,17 +87,12 @@ int main(){
         std_pthread = sqrt(std_pthread/NUM_TESTS);
         std_openblas = sqrt(std_openblas/NUM_TESTS);
         std_mkl = sqrt(std_mkl/NUM_TESTS);
-        avg_normal = avg_normal/times_normal.size();
-        avg_pthread = avg_pthread/times_pthread.size();
-        avg_openblas = avg_openblas/times_openblas.size();
-        avg_mkl = avg_mkl/times_mkl.size();
 
         f_mean << i << " " << avg_normal << " " << avg_pthread << " " << avg_openblas << " " << avg_mkl << endl;
-        f_std << i << " " << std_normal << " " << std_pthread << " " << std_openblas << " " << std_mkl << endl;
-        //f_mean << i << " " << avg_normal << " " << std_normal << " " << avg_pthread << " " << std_pthread << " " << avg_openblas << " " << std_openblas << " " << avg_mkl << " " << std_mkl << endl;
+        f_stat << i << " " << avg_normal << " " << std_normal << " " << avg_pthread << " " << std_pthread << " " << avg_openblas << " " << std_openblas << " " << avg_mkl << " " << std_mkl << endl;
     }
     f_mean.close();
-    f_std.close();
+    f_stat.close();
     f_all.close();
     return 0;
 }
