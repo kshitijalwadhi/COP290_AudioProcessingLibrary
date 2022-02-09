@@ -232,6 +232,7 @@ Input:
     Mat input: Input to the layer
     Mat weights: Weights of the layer
     Mat bias: Bias of the layer
+    int method: Method to be used for matrix multiplication (0: Standard, 1: Pthread, 2: OpenBLAS, 3: MKL)
 Output:
     Mat: Output of the layer
 */

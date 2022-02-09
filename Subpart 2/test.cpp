@@ -22,6 +22,9 @@ int NUM_TESTS = 4;
 
 int main(){
 
+    ofstream f;
+    f.open("results.txt");
+
     for (int i = START_SZ;i<END_SZ;i*=2)
     {
         vector<float> times_normal;
@@ -50,7 +53,6 @@ int main(){
             times_mkl.push_back(duration_cast<microseconds>(end_time_4 - end_time_3).count()/1000);
         }
 
-        cout<<"Matrix size: "<<i<<endl;
         float avg_normal = 0;
         float avg_pthread = 0;
         float avg_openblas = 0;
@@ -66,11 +68,9 @@ int main(){
         avg_pthread = avg_pthread/times_pthread.size();
         avg_openblas = avg_openblas/times_openblas.size();
         avg_mkl = avg_mkl/times_mkl.size();
-        cout<<"Normal: "<<avg_normal<<endl;
-        cout<<"Pthread: "<<avg_pthread<<endl;
-        cout<<"Openblas: "<<avg_openblas<<endl;
-        cout<<"Mkl: "<<avg_mkl<<endl;
-        cout<<endl;
+
+        f << i << " " << avg_normal << " " << avg_pthread << " " << avg_openblas << " " << avg_mkl << endl;
     }
+    f.close();
     return 0;
 }
