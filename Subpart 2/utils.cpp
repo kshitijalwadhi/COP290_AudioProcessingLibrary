@@ -246,6 +246,12 @@ Mat FC_Layer(Mat M, Mat W, Mat B, int method=0)
     }
     else if(method == 1)
     {
+        if (M.size() < NUM_CORES)
+        {
+            Mat output = matmul(M, W);
+            output = add(output, B);
+            return output;
+        }
         Mat M3;
         spawnThreads(M, W, NUM_CORES);
         return add(M3, B);

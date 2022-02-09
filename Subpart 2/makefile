@@ -16,7 +16,7 @@ OBJ_PERFORMANCE = test.o matrices.o matrices_pthread.o matrices_openblas.o matri
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 all: $(OBJ_MAIN)
-	$(CC) -o $@ $^ $(BLAS_FLAGS) $(MKL_FLAGS) $(PTHREAD_FLAGS)
+	$(CC) -o yourcode.out $^ $(BLAS_FLAGS) $(MKL_FLAGS) $(PTHREAD_FLAGS)
 
 performance: $(OBJ_PERFORMANCE)
 	$(CC) -o $@ $^ $(PTHREAD_FLAGS) $(BLAS_FLAGS) $(MKL_FLAGS)

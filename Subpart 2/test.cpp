@@ -23,7 +23,7 @@ int NUM_TESTS = 4;
 int main(){
 
     ofstream f;
-    f.open("results.txt");
+    f.open("results.dat");
 
     for (int i = START_SZ;i<END_SZ;i*=2)
     {

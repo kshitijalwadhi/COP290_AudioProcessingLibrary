@@ -26,16 +26,32 @@ int main(int argc, char **argv)
 
     if (fun == "fullyconnected")
     {
-        if (argc != 6)
+        if (argc != 7)
         {
             cout << "Invalid arguments" << endl;
-            cout << "Usage: ./main fullyconnected <input_file> <weight_file> <bias_file> <output_file>" << endl;
+            cout << "Usage: ./main fullyconnected <input_file> <weight_file> <bias_file> <output_file> <matmul_implementation>" << endl;
             return 0;
         }
         string input_file = argv[2];
         string weight_file = argv[3];
         string bias_file = argv[4];
         string output_file = argv[5];
+        string matmul_implementation = argv[6];
+        int method = 0;
+        if (matmul_implementation == "normal")
+            method = 0;
+        else if (matmul_implementation == "pthread")
+            method = 1;
+        else if (matmul_implementation == "openblas")
+            method = 2;
+        else if (matmul_implementation == "mkl")
+            method = 3;
+        else
+        {
+            cout << "Invalid matmul implementation" << endl;
+            cout << "Usage: ./main fullyconnected <input_file> <weight_file> <bias_file> <output_file> <matmul_implementation>" << endl;
+            return 0;
+        }
 
         bool flag = is_file_exist(input_file) && is_file_exist(weight_file) && is_file_exist(bias_file);
         if (flag == false)
@@ -54,7 +70,7 @@ int main(int argc, char **argv)
             return 0;
         }
 
-        Mat output = FC_Layer(M, W, B);
+        Mat output = FC_Layer(M, W, B, method);
         write_matrix(output, output_file);
     }
 
