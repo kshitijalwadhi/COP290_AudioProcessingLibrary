@@ -16,9 +16,9 @@ using namespace std::chrono;
 
 #define NUM_CORES 4
 
-int START_SZ = 64;
-int END_SZ = 8000;
-int NUM_TESTS = 8;
+int START_SZ = 1024;
+int END_SZ = 10000;
+int NUM_TESTS = 2;
 
 int main(){
 
@@ -38,11 +38,14 @@ int main(){
         {
             Mat M1 = randMat(i,i);
             Mat M2 = randMat(i,1);
-
             auto start_time = high_resolution_clock::now();
             Mat M4 = matmul(M1,M2);
             auto end_time_1 = high_resolution_clock::now();
             spawnThreads(M1,M2,NUM_CORES);
+            if(j==0)
+            {
+                cout<<"pthreading done for size "<<i<<endl;
+            }
             auto end_time_2 = high_resolution_clock::now();
             Mat M5 = matmul_blas(M1,M2);
             auto end_time_3 = high_resolution_clock::now();

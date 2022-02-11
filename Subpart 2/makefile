@@ -11,6 +11,8 @@ MKL_FLAGS = -lpthread -I $(MKL_INCLUDE_ROOT) -L $(MKL_LIB_ROOT) -fopenmp -lmkl_i
 DEPS = activationFns.h utils.h matrices_mkl.h matrices_pthread.h matrices_openblas.h matrices.h subsampling.h
 OBJ_MAIN = main.o activationFns.o utils.o matrices_mkl.o matrices_pthread.o matrices_openblas.o matrices.o subsampling.o
 OBJ_PERFORMANCE = test.o matrices.o matrices_pthread.o matrices_openblas.o matrices_mkl.o utils.o
+OBJ_PERFORMANCE_PTHREAD = test_pthread.o matrices.o matrices_pthread.o matrices_openblas.o matrices_mkl.o utils.o
+
 
 %.o: %.cpp $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
@@ -20,6 +22,9 @@ all: $(OBJ_MAIN)
 
 performance: $(OBJ_PERFORMANCE)
 	$(CC) -o $@ $^ $(PTHREAD_FLAGS) $(BLAS_FLAGS) $(MKL_FLAGS)
+
+pthread_performance: $(OBJ_PERFORMANCE_PTHREAD)
+	$(CC) -o $@ $^ $(BLAS_FLAGS) $(MKL_FLAGS) $(PTHREAD_FLAGS)
 
 clean:
 	rm -f *.o 

@@ -43,6 +43,7 @@ void* multi(void* args)
             }
         }
     }
+    pthread_exit(NULL);
 }
 
 void spawnThreads(Mat M1, Mat M2, int n)
