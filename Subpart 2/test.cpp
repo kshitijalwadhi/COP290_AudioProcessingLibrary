@@ -16,9 +16,9 @@ using namespace std::chrono;
 
 #define NUM_CORES 4
 
-int START_SZ = 1024;
-int END_SZ = 10000;
-int NUM_TESTS = 2;
+int START_SZ = 32;
+int END_SZ = 513;
+int NUM_TESTS = 30;
 
 int main(){
 
@@ -37,7 +37,7 @@ int main(){
         for(int j=0;j<NUM_TESTS;j++)
         {
             Mat M1 = randMat(i,i);
-            Mat M2 = randMat(i,1);
+            Mat M2 = randMat(i,i);
             auto start_time = high_resolution_clock::now();
             Mat M4 = matmul(M1,M2);
             auto end_time_1 = high_resolution_clock::now();
