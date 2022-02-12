@@ -39,7 +39,7 @@ int main(){
                 Mat M1 = randMat(i,i);
                 Mat M2 = randMat(i,i);
                 auto start_time = high_resolution_clock::now();
-                spawnThreads(M1,M2,numT);
+                Mat M3 = spawnThreads(M1,M2,numT);
                 auto end_time = high_resolution_clock::now();
 
                 times_pthread.push_back(duration_cast<microseconds>(end_time - start_time).count());

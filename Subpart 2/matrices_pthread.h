@@ -6,7 +6,7 @@
 #define Vec std::vector<float>
 
 void matmul_threading(Mat M1, Mat M2, int start_row, int end_row);
-void spawnThreads(Mat M1, Mat M2, int n);
+Mat spawnThreads(Mat M1, Mat M2, int n);
 
 
 #endif

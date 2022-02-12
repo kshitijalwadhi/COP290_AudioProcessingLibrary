@@ -19,6 +19,7 @@ using namespace std::chrono;
 int START_SZ = 32;
 int END_SZ = 513;
 int NUM_TESTS = 30;
+bool check_correctness = true;
 
 int main(){
 
@@ -41,16 +42,22 @@ int main(){
             auto start_time = high_resolution_clock::now();
             Mat M4 = matmul(M1,M2);
             auto end_time_1 = high_resolution_clock::now();
-            spawnThreads(M1,M2,NUM_CORES);
-            if(j==0)
-            {
-                cout<<"pthreading done for size "<<i<<endl;
-            }
+            Mat M3 = spawnThreads(M1,M2,NUM_CORES);
             auto end_time_2 = high_resolution_clock::now();
             Mat M5 = matmul_blas(M1,M2);
             auto end_time_3 = high_resolution_clock::now();
             Mat M6 = matmul_mkl(M1,M2);
             auto end_time_4 = high_resolution_clock::now();
+
+            if (check_correctness)
+            {
+                bool flag1 = isEqual(M4,M3);
+                bool flag2 = isEqual(M3,M5);
+                bool flag3 = isEqual(M5,M6);
+                bool flag = flag1 && flag2 && flag3;
+                if(flag==false)
+                    cout<<"Results are different"<<endl;
+            }
 
             times_normal.push_back(duration_cast<microseconds>(end_time_1 - start_time).count());
             times_pthread.push_back(duration_cast<microseconds>(end_time_2 - end_time_1).count());
