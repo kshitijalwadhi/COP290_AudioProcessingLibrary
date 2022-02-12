@@ -7,7 +7,7 @@ set style histogram clustered gap 5
 set style fill solid 1.0 border lt -1
 set errorbars fullwidth
 set style fill solid 1 border lt -1
-set title "Comparison of Mean and Standard Deviation of latencies of naive, pthread, openblas, and mkl implementations"
+set title "Box plots of performances of naive, pthread, openblas, and mkl implementations"
 set style histogram errorbars gap 5 lw 2
 array A[4] = ["naive", "pthread", "openblas", "mkl"]
 set xlabel "Size of matrix"
