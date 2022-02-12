@@ -252,8 +252,7 @@ Mat FC_Layer(Mat M, Mat W, Mat B, int method=0)
             output = add(output, B);
             return output;
         }
-        Mat M3;
-        spawnThreads(M, W, NUM_CORES);
+        Mat M3 = spawnThreads(M, W, NUM_CORES);
         return add(M3, B);
     }
     else if(method==2)

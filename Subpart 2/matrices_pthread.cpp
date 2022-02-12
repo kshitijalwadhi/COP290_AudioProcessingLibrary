@@ -46,7 +46,7 @@ void* multi(void* args)
     pthread_exit(NULL);
 }
 
-void spawnThreads(Mat M1, Mat M2, int n)
+Mat spawnThreads(Mat M1, Mat M2, int n)
 {
     int a = M1.size();
     int b = M1[0].size();
@@ -71,4 +71,6 @@ void spawnThreads(Mat M1, Mat M2, int n)
     {
         pthread_join(threads[i], NULL);
     }
+
+    return M3;
 }
