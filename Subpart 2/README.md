@@ -120,4 +120,6 @@ make clean
 
 ## Performance Evaluation
 
-For evaluating the performance, we make use of the `performance` and `pthread_performance` executables generated. By running these executables, we get the time taken by our 
+For evaluating the performance, we make use of the `performance` and `pthread_performance` executables generated. By running these executables, we get the time taken by our implementations dumped into .dat files in the directory. These dat files are further used by the graphing scripts to make the required plots. 
+
+More about the evaluation details and the graphs are given in the [report](COP290_Task1_Performance.pdf).
