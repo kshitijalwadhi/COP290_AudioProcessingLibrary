@@ -7,12 +7,12 @@ set style histogram clustered gap 5
 set style fill solid 1.0 border lt -1
 set errorbars fullwidth
 set style fill solid 1 border lt -1
-set title "Comparison of Mean and Standard Deviation of latencies of pthread, openblas, and mkl implementations"
+set title "Comparison of Mean and Standard Deviation of latencies of naive, pthread, openblas, and mkl implementations"
 set style histogram errorbars gap 5 lw 2
-array A[3] = ["pthread", "openblas", "mkl"]
+array A[4] = ["naive", "pthread", "openblas", "mkl"]
 set xlabel "Size of matrix"
 set ylabel "Latency (microseconds)"
-plot for [COL=4:8:2] 'results_stat.dat' using COL:COL+1:xticlabels(1) title A[COL/2 - 1]
+plot for [COL=2:8:2] 'results_stat.dat' using COL:COL+1:xticlabels(1) title A[COL/2]
 set terminal png size 1920,1080
 set output 'latency_comparison.png'
 replot
