@@ -120,6 +120,14 @@ make clean
 
 ## Performance Evaluation
 
-For evaluating the performance, we make use of the `performance` and `pthread_performance` executables generated. By running these executables, we get the time taken by our implementations dumped into .dat files in the directory. These dat files are further used by the graphing scripts to make the required plots. 
+For evaluating the performance, we make use of the `performance` and `pthread_performance` executables generated. By running these executables, we get the time taken by our implementations dumped into `.dat` files in the directory. These `.dat` files are further used by the graphing scripts to make the required plots. 
+
+To obtain the `.eps` and `.png` plots which compare the various implementations, type `gnuplot` in your terminal to enter the `gnuplot` environment. There are two scripts, one for each of the following plots:
+- Performance on varying number of threads. To obtain this plot, run the following command:
+  
+  `load "pthread_script"`
+- Performance across various implementations (naive, pthread, openblas, mkl). To obtain this plot, run the following command:
+`load "script"`
+
 
 More about the evaluation details and the graphs are given in the [report](COP290_Task1_Performance.pdf).
