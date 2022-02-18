@@ -125,9 +125,10 @@ For evaluating the performance, we make use of the `performance` and `pthread_pe
 To obtain the `.eps` and `.png` plots which compare the various implementations, type `gnuplot` in your terminal to enter the `gnuplot` environment. There are two scripts, one for each of the following plots:
 - Performance on varying number of threads. To obtain this plot, run the following command:
   
-  `load "pthread_script"`
+  ```load "pthread_script"```
 - Performance across various implementations (naive, pthread, openblas, mkl). To obtain this plot, run the following command:
-`load "script"`
+  
+    ```load "script"```
 
 
 More about the evaluation details and the graphs are given in the [report](COP290_Task1_Performance.pdf).
