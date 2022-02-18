@@ -189,6 +189,14 @@ Mat randMat(int a, int b){
     return M;
 }
 
+Vec randVec(int a){
+    Vec V(a);
+    for(int i=0;i<a;i++){
+        V[i] = rand()%10;
+    }
+    return V;
+}
+
 bool isEqual(Mat M1, Mat M2){
     if(M1.size() != M2.size()){
         return false;

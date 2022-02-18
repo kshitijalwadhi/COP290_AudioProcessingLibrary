@@ -28,7 +28,7 @@ class DNN
         architecture: FC1 [250x144] -> RELU -> FC2 [144x144] -> RELU -> 
         FC3 [144X144] -> RELU -> FC4 [144x12] -> softmax
         */
-        void feedForward(Vec input)
+        void feedForward(Mat input)
         {
             for (int i = 0; i < weights.size(); i++)
             {

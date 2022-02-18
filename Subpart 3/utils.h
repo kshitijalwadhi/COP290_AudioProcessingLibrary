@@ -14,6 +14,7 @@ void print_matrix(Mat M);
 void write_matrix(Mat M, std::string filename);
 void write_vector(Vec V, std::string filename);
 Mat randMat(int a, int b);
+Vec randVec(int a);
 bool isEqual(Mat M1, Mat M2);
 Mat add(Mat M1, Mat M2);
 Mat FC_Layer(Mat M, Mat W, Mat B, int method=0);
