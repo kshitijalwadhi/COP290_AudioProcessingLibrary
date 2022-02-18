@@ -7,6 +7,7 @@
 #include "activationFns.h"
 #include "subsampling.h"
 #include "utils.h"
+#include "dnn.h"
 using namespace std;
 
 // call the library from here after taking the arguments
