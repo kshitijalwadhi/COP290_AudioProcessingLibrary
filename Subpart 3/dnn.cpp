@@ -13,14 +13,16 @@ class DNN
 {
     private:
         vector<Mat> weights;
-        vector<Vec> biases;
-        Vec output;        
+        vector<Mat> biases;
+        Vec output;
+        vector<string> class_labels;
 
     public:
-        DNN(vector<Mat> weights, vector<Vec> biases)
+        DNN(vector<Mat> weights, vector<Mat> biases, vector<string> class_labels)
         {
             this->weights = weights;
             this->biases = biases;
+            this->class_labels = class_labels;
         }
 
         /* 
@@ -30,17 +32,32 @@ class DNN
         */
         void feedForward(Mat input)
         {
-            for (int i = 0; i < weights.size(); i++)
+            for (int i = 0; i < weights.size()-1; i++)
             {
-                // code here
+                input = FC_Layer(input, weights[i], biases[i],0);
+                input = relu(input);
             }
+            input = FC_Layer(input, weights[weights.size()-1], biases[weights.size()-1],0);
+            this->output = softmax(flatten(input));
             return;
         }
 
         vector<string> topThree()
         {
             vector<string> topThree;
-            // code here
+            for (int i = 0; i < 3; i++)
+            {
+                int max_index = 0;
+                for (int j = 0; j < output.size(); j++)
+                {
+                    if (output[j] > output[max_index])
+                    {
+                        max_index = j;
+                    }
+                }
+                topThree.push_back(class_labels[max_index]);
+                output[max_index] = -1;
+            }
             return topThree;
         }
 

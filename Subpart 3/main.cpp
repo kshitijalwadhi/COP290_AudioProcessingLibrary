@@ -7,10 +7,10 @@
 #include "activationFns.h"
 #include "subsampling.h"
 #include "utils.h"
-#include "dnn.h"
+//#include "dnn.h"
+#include "dnn.cpp"
 using namespace std;
 
-// call the library from here after taking the arguments
 int main(int argc, char **argv)
 {
     Mat inp = randMat(1, 250);
@@ -18,15 +18,40 @@ int main(int argc, char **argv)
     Mat w2 = randMat(144, 144);
     Mat w3 = randMat(144, 144);
     Mat w4 = randMat(144, 12);
-    Vec b1 = randVec(144);
-    Vec b2 = randVec(144);
-    Vec b3 = randVec(144);
-    Vec b4 = randVec(12);
+    Mat b1 = randMat(1, 144);
+    Mat b2 = randMat(1, 144);
+    Mat b3 = randMat(1, 144);
+    Mat b4 = randMat(1, 12);
     vector<Mat> weights = {w1, w2, w3, w4};
-    vector<Vec> biases = {b1, b2, b3, b4};
-    DNN dnn(weights, biases);
+    vector<Mat> biases = {b1, b2, b3, b4};
+    vector<string> class_labels = {"silence", "unknown", "yes", "no", "up", "down", "left", "right", "on", "off", "stop", "go"};
+    DNN dnn(weights, biases, class_labels);
     dnn.feedForward(inp);
     vector<string> topThree = dnn.topThree();
+    for (int i = 0; i < topThree.size(); i++)
+    {
+        cout << topThree[i] << endl;
+    }
+
+    inp = randMat(1, 250);
+    w1 = randMat(250, 144);
+    w2 = randMat(144, 144);
+    w3 = randMat(144, 144);
+    w4 = randMat(144, 12);
+    b1 = randMat(1, 144);
+    b2 = randMat(1, 144);
+    b3 = randMat(1, 144);
+    b4 = randMat(1, 12);
+    weights = {w1, w2, w3, w4};
+    biases = {b1, b2, b3, b4};
+    class_labels = {"silence", "unknown", "yes", "no", "up", "down", "left", "right", "on", "off", "stop", "go"};
+    DNN dnn2(weights, biases, class_labels);
+    dnn2.feedForward(inp);
+    topThree = dnn2.topThree();
+    for (int i = 0; i < topThree.size(); i++)
+    {
+        cout << topThree[i] << endl;
+    }
 
     return 0;
 }

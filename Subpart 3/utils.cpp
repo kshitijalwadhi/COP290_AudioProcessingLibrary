@@ -276,3 +276,13 @@ Mat FC_Layer(Mat M, Mat W, Mat B, int method=0)
         return output;
     }
 }
+
+Vec flatten(Mat M){
+    Vec V;
+    for(int i=0;i<M.size();i++){
+        for(int j=0;j<M[0].size();j++){
+            V.push_back(M[i][j]);
+        }
+    }
+    return V;
+}
