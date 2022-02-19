@@ -13,6 +13,7 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
+    srand(time(NULL));
     Mat inp = randMat(1, 250);
     Mat w1 = randMat(250, 144);
     Mat w2 = randMat(144, 144);
@@ -32,26 +33,5 @@ int main(int argc, char **argv)
     {
         cout << topThree[i] << endl;
     }
-
-    inp = randMat(1, 250);
-    w1 = randMat(250, 144);
-    w2 = randMat(144, 144);
-    w3 = randMat(144, 144);
-    w4 = randMat(144, 12);
-    b1 = randMat(1, 144);
-    b2 = randMat(1, 144);
-    b3 = randMat(1, 144);
-    b4 = randMat(1, 12);
-    weights = {w1, w2, w3, w4};
-    biases = {b1, b2, b3, b4};
-    class_labels = {"silence", "unknown", "yes", "no", "up", "down", "left", "right", "on", "off", "stop", "go"};
-    DNN dnn2(weights, biases, class_labels);
-    dnn2.feedForward(inp);
-    topThree = dnn2.topThree();
-    for (int i = 0; i < topThree.size(); i++)
-    {
-        cout << topThree[i] << endl;
-    }
-
     return 0;
 }

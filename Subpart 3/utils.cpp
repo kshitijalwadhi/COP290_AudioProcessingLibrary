@@ -183,7 +183,11 @@ Mat randMat(int a, int b){
     Mat M(a, Vec(b));
     for(int i=0;i<a;i++){
         for(int j=0;j<b;j++){
-            M[i][j] = rand()%10;
+            float num = (float) rand()/RAND_MAX;
+            float ran_sign = rand()%2;
+            if (ran_sign == 0)
+                num = -num;
+            M[i][j] = num;
         }
     }
     return M;
@@ -192,7 +196,7 @@ Mat randMat(int a, int b){
 Vec randVec(int a){
     Vec V(a);
     for(int i=0;i<a;i++){
-        V[i] = rand()%10;
+        V[i] = (float) rand()/RAND_MAX;
     }
     return V;
 }
