@@ -1,4 +1,4 @@
-'filename', 'actual_label', 'predicted_label', '_silence_', '_unknown_', 'yes', 'no', 'up', 'down', 'left', 'right', 'on', 'off', 'stop', 'go'
+filename, actual_label, predicted_label, _silence_, _unknown_, yes, no, up, down, left, right, on, off, stop, go
 b5cf6ea8_nohash_3, 'yes', 'yes',1.28E-25,2.64E-06,0.9999958,6.46E-11,2.27E-16,1.05E-08,1.53E-06,1.31E-15,1.89E-14,2.03E-11,3.02E-14,3.92E-13
 ca4d5368_nohash_5, 'yes', 'yes',2.47E-21,0.000288308,0.99968946,9.45E-08,4.94E-15,5.82E-09,2.21E-05,1.94E-12,1.88E-13,1.14E-08,1.53E-14,6.81E-10
 333784b7_nohash_0, 'yes', 'yes',5.72E-28,1.23E-06,0.99374276,5.82E-08,1.03E-15,5.15E-08,0.006256021,9.03E-12,7.08E-15,2.92E-11,1.06E-13,4.40E-11

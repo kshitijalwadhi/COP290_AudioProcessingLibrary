@@ -290,3 +290,33 @@ Vec flatten(Mat M){
     }
     return V;
 }
+
+Mat reshape(Vec V, int a, int b){
+    Mat M(a, Vec(b));
+    for(int i=0;i<a;i++){
+        for(int j=0;j<b;j++){
+            M[i][j] = V[i*b+j];
+        }
+    }
+    return M;
+}
+
+Mat readInput(string filename, int a, int b){
+    
+    ifstream file(filename);
+    string line;
+    // read vector
+    Mat M(a, Vec(b));
+    for (int i = 0; i < a; i++)
+    {
+        getline(file, line);
+        stringstream ss(line);
+        string token;
+        for (int j = 0; j < b; j++)
+        {
+            getline(ss, token, ' ');
+            M[i][j] = stof(token);
+        }
+    }
+    return M;
+}

@@ -19,5 +19,6 @@ bool isEqual(Mat M1, Mat M2);
 Mat add(Mat M1, Mat M2);
 Mat FC_Layer(Mat M, Mat W, Mat B, int method=0);
 Vec flatten(Mat M);
-
+Mat reshape(Vec V, int a, int b);
+Mat readInput(std::string filename, int a, int b);
 #endif

@@ -42,9 +42,9 @@ class DNN
             return;
         }
 
-        vector<string> topThree()
+        vector<pair<string,float>> topThree()
         {
-            vector<string> topThree;
+            vector<pair<string,float>> topThree;
             for (int i = 0; i < 3; i++)
             {
                 int max_index = 0;
@@ -55,7 +55,7 @@ class DNN
                         max_index = j;
                     }
                 }
-                topThree.push_back(class_labels[max_index]);
+                topThree.push_back({class_labels[max_index], output[max_index]});
                 output[max_index] = -1;
             }
             return topThree;

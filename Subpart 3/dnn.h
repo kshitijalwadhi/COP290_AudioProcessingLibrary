@@ -15,7 +15,7 @@ class DNN
     public:
         DNN(vector<vector<vector<float> >> weights, vector<vector<vector<float> >> biases, vector<string> class_labels);
         void feedForward(vector<vector<float> > input);
-        vector<string> topThree();
+        vector<pair<string,float>> topThree();
 };
 
 #endif
