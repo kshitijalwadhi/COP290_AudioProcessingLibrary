@@ -27,4 +27,6 @@ mfcc_features/d53e25ba_nohash_1.txt left yes unknown 0.99998 1.04262e-05 5.57225
 mfcc_features/d98dd124_nohash_2.txt off up on 0.99008 0.00594983 0.00235899 
 mfcc_features/d9b8fab2_nohash_1.txt up off unknown 0.682075 0.263034 0.0385631 
 mfcc_features/db9cd41d_nohash_0.txt right unknown on 0.94589 0.0539853 9.93854e-05 
-mfcc_features/e4be0cf6_nohash_3.txt off up on 0.839609 0.0824754 0.0767866 
+mfcc_features/e4be0cf6_nohash_3.txt off up on 0.839609 0.0824754 0.0767866
+mfcc_features/7846fd85_nohash_1.txt 9 8 4 0.999897 7.04748e-05 2.05334e-05 
+mfcc_features/7846fd85_nohash_1.txt off on up 0.999897 7.04748e-05 2.05334e-05 

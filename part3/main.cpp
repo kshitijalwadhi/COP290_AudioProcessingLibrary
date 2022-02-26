@@ -3,12 +3,7 @@
 #include <sstream>
 #include <vector>
 #include <cmath>
-#include "matrices.h"
-#include "activationFns.h"
-#include "subsampling.h"
-#include "utils.h"
-#include "dnn.cpp"
-#include "dnn_weights.h"
+#include "audio.h"
 using namespace std;
 
 int main(int argc, char **argv)
@@ -28,21 +23,11 @@ int main(int argc, char **argv)
         cout << "Check the file path" << endl;
         return 0;
     }
-    Mat inp = readInput(audio_file,1,250);
-    Mat w1 = reshape(IP1_WT, 250, 144);
-    Mat w2 = reshape(IP2_WT, 144, 144);
-    Mat w3 = reshape(IP3_WT, 144, 144);
-    Mat w4 = reshape(IP4_WT, 144, 12);
-    Mat b1 = reshape(IP1_BIAS, 1, 144);
-    Mat b2 = reshape(IP2_BIAS, 1, 144);
-    Mat b3 = reshape(IP3_BIAS, 1, 144);
-    Mat b4 = reshape(IP4_BIAS, 1, 12);
-    vector<Mat> weights = {w1, w2, w3, w4};
-    vector<Mat> biases = {b1, b2, b3, b4};
     vector<string> class_labels = {"silence", "unknown", "yes", "no", "up", "down", "left", "right", "on", "off", "stop", "go"};
-    DNN dnn(weights, biases, class_labels);
-    dnn.feedForward(inp);
-    vector<pair<string,float>> topThree = dnn.topThree();
+    
+    pred_t* pred = new pred_t[3];
+    libaudioAPI(audio_file.c_str(), pred);
+
     ofstream outfile;
     bool flag1 = is_file_exist(output_file);
     if (flag1 == true)
@@ -50,13 +35,13 @@ int main(int argc, char **argv)
     else
         outfile.open(output_file);
     outfile << audio_file << " ";
-    for (int i = 0; i < topThree.size(); i++)
+    for (int i = 0; i < 3; i++)
     {
-        outfile << topThree[i].first << " ";
+        outfile << class_labels[pred[i].label] << " ";
     }
-    for (int i = 0; i < topThree.size(); i++)
+    for (int i = 0; i < 3; i++)
     {
-        outfile << topThree[i].second << " ";
+        outfile << pred[i].prob << " ";
     }
     outfile << endl;
     outfile.close();
