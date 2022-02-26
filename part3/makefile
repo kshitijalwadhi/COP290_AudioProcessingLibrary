@@ -17,8 +17,6 @@ OBJ_MAIN = main.o activationFns.o utils.o matrices_mkl.o matrices_pthread.o matr
 shared: $(OBJ_MAIN)
 	$(CC) -shared -o lib/libaudio.so $^ $(BLAS_FLAGS) $(MKL_FLAGS) $(PTHREAD_FLAGS)
 
-# all: $(OBJ_MAIN)
-# 	$(CC) -o yourcode.out $^ $(BLAS_FLAGS) $(MKL_FLAGS) $(PTHREAD_FLAGS) -laudio -L lib
 all: 
 	$(CC) main.cpp -o yourcode.out -laudio -L lib
 
