@@ -7,7 +7,7 @@
 #include "activationFns.h"
 #include "subsampling.h"
 #include "utils.h"
-#include "dnn.cpp"
+#include "dnn.h"
 #include "dnn_weights.h"
 using namespace std;
 
