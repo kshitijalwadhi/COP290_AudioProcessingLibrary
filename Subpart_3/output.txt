@@ -2,3 +2,4 @@ mfcc_features/7846fd85_nohash_1.txt off on up 0.999897 7.04748e-05 2.05334e-05
 mfcc_features/7846fd85_nohash_1.txt off on up 0.999897 7.04748e-05 2.05334e-05 
 mfcc_features/3c257192_nohash_3.txt stop up off 0.999976 1.97139e-05 2.77319e-06 
 mfcc_features/7846fd85_nohash_1.txt off on up 0.999897 7.04748e-05 2.05334e-05 
+mfcc_features/7846fd85_nohash_1.txt off on up 0.999897 7.04748e-05 2.05334e-05 

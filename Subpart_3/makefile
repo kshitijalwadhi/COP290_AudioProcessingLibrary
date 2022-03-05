@@ -1,6 +1,6 @@
 CC = g++
 
-BLAS_ROOT = /home/kshitij/libs/OpenBLAS
+BLAS_ROOT = $(MKL_BLAS_PATH)
 
 PTHREAD_FLAGS = -pthread
 BLAS_FLAGS = -I $(BLAS_ROOT)/include -L $(BLAS_ROOT)/lib -lopenblas -lgfortran -lpthread
