@@ -4,7 +4,6 @@
 #include <vector>
 #include <cmath>
 #include "matrices.h"
-#include "matrices_mkl.h"
 #include "matrices_openblas.h"
 #include "matrices_pthread.h"
 using namespace std;
@@ -244,11 +243,11 @@ Input:
     Mat input: Input to the layer
     Mat weights: Weights of the layer
     Mat bias: Bias of the layer
-    int method: Method to be used for matrix multiplication (0: Standard, 1: Pthread, 2: OpenBLAS, 3: MKL)
+    int method: Method to be used for matrix multiplication (0: Standard, 1: Pthread, 2: OpenBLAS)
 Output:
     Mat: Output of the layer
 */
-Mat FC_Layer(Mat M, Mat W, Mat B, int method=0)
+Mat FC_Layer(Mat M, Mat W, Mat B, int method=2)
 {
     if(method==0)
     {
@@ -267,15 +266,9 @@ Mat FC_Layer(Mat M, Mat W, Mat B, int method=0)
         Mat M3 = spawnThreads(M, W, NUM_CORES);
         return add(M3, B);
     }
-    else if(method==2)
-    {
-        Mat output = matmul_blas(M, W);
-        output = add(output, B);
-        return output;
-    }
     else
     {
-        Mat output = matmul_mkl(M, W);
+        Mat output = matmul_blas(M, W);
         output = add(output, B);
         return output;
     }
