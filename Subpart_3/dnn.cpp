@@ -26,10 +26,10 @@ void DNN::feedForward(Mat input)
 {
     for (int i = 0; i < weights.size()-1; i++)
     {
-        input = FC_Layer(input, weights[i], biases[i],0);
+        input = FC_Layer(input, weights[i], biases[i],2);
         input = relu(input);
     }
-    input = FC_Layer(input, weights[weights.size()-1], biases[weights.size()-1],0);
+    input = FC_Layer(input, weights[weights.size()-1], biases[weights.size()-1],2);
     this->output = softmax(flatten(input));
     return;
 }
