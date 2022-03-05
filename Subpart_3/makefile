@@ -11,10 +11,11 @@ OBJ_MAIN = main.o activationFns.o utils.o matrices_pthread.o matrices_openblas.o
 %.o: %.cpp $(DEPS)
 	$(CC) -c -fpic -o $@ $< $(CFLAGS)
 
-shared: $(OBJ_MAIN)
+all: $(OBJ_MAIN) 
+	if [ ! -d lib ]; then \
+		mkdir lib; \
+	fi
 	$(CC) -shared -o lib/libaudio.so $^ $(BLAS_FLAGS) $(PTHREAD_FLAGS)
-
-all: 
 	$(CC) main.cpp -o yourcode.out -laudio -L lib
 
 clean:
