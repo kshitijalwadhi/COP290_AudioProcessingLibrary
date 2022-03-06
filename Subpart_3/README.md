@@ -34,7 +34,7 @@ We make use of a makefile to ease in the process of generation of executable. Th
 
 ```console
 export MKL_BLAS_PATH=/path/to/openblas
-export LD_LIBRARY_PATH=./lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
 make all
 ```
 
